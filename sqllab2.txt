@@ -1,0 +1,120 @@
+mysql> show tables;
++---------------------+
+| Tables_in_anudip99  |
++---------------------+
+| account             |
+| book                |
+| client_master       |
+| company             |
+| course              |
+| employee            |
+| student_information |
++---------------------+
+7 rows in set (0.01 sec)
+
+mysql> desc student_information;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| registration_no | int         | YES  |     | NULL    |       |
+| name            | varchar(50) | NO   |     | NULL    |       |
+| branch          | varchar(50) | NO   |     | NULL    |       |
+| contact         | double      | NO   |     | NULL    |       |
+| Address         | varchar(70) | NO   |     | NULL    |       |
+| email           | varchar(50) | NO   |     | NULL    |       |
+| dob             | date        | NO   |     | NULL    |       |
+| doj             | date        | NO   |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> select * from student_information;
+Empty set (0.00 sec)
+
+mysql> insert into student_information values(101,'frank','cse',6765785,'delhi','frank@gmail.com','1998-06-07','2022-10-21');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_information values(102,'arun','cse',7584765,'kilkata','arun@gmail.com','1999-05-08','2022-09-21');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student_information values(103,'raju','ece',7584765,'chennai','raju@gmail.com','1997-09-08','2022-08-21');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student_information;
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+| registration_no | name  | branch | contact | Address | email           | dob        | doj        |
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+|             101 | frank | cse    | 6765785 | delhi   | frank@gmail.com | 1998-06-07 | 2022-10-21 |
+|             102 | arun  | cse    | 7584765 | kilkata | arun@gmail.com  | 1999-05-08 | 2022-09-21 |
+|             103 | raju  | ece    | 7584765 | chennai | raju@gmail.com  | 1997-09-08 | 2022-08-21 |
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update student_information set Address='kolkata' where registration_no=102;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student_information;
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+| registration_no | name  | branch | contact | Address | email           | dob        | doj        |
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+|             101 | frank | cse    | 6765785 | delhi   | frank@gmail.com | 1998-06-07 | 2022-10-21 |
+|             102 | arun  | cse    | 7584765 | kolkata | arun@gmail.com  | 1999-05-08 | 2022-09-21 |
+|             103 | raju  | ece    | 7584765 | chennai | raju@gmail.com  | 1997-09-08 | 2022-08-21 |
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student_information to studinf;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'to studinf' at line 1
+mysql> alter table student_information rename to studinf;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from studinf;
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+| registration_no | name  | branch | contact | Address | email           | dob        | doj        |
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+|             101 | frank | cse    | 6765785 | delhi   | frank@gmail.com | 1998-06-07 | 2022-10-21 |
+|             102 | arun  | cse    | 7584765 | kolkata | arun@gmail.com  | 1999-05-08 | 2022-09-21 |
+|             103 | raju  | ece    | 7584765 | chennai | raju@gmail.com  | 1997-09-08 | 2022-08-21 |
++-----------------+-------+--------+---------+---------+-----------------+------------+------------+
+3 rows in set (0.01 sec)
+
+mysql> alter table studinf rename column registration_no to regno;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from studinf;
++-------+-------+--------+---------+---------+-----------------+------------+------------+
+| regno | name  | branch | contact | Address | email           | dob        | doj        |
++-------+-------+--------+---------+---------+-----------------+------------+------------+
+|   101 | frank | cse    | 6765785 | delhi   | frank@gmail.com | 1998-06-07 | 2022-10-21 |
+|   102 | arun  | cse    | 7584765 | kolkata | arun@gmail.com  | 1999-05-08 | 2022-09-21 |
+|   103 | raju  | ece    | 7584765 | chennai | raju@gmail.com  | 1997-09-08 | 2022-08-21 |
++-------+-------+--------+---------+---------+-----------------+------------+------------+
+3 rows in set (0.00 sec)
+
+
+
+mysql> create table subject(subcode int,subname varchar(60),weightage int);
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> insert into subject values(001,'physics',57);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into subject values(002,'chemistry',65);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into subject values(003,'maths',60);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from subject;
++---------+-----------+-----------+
+| subcode | subname   | weightage |
++---------+-----------+-----------+
+|       1 | physics   |        57 |
+|       2 | chemistry |        65 |
+|       3 | maths     |        60 |
++---------+-----------+-----------+
+3 rows in set (0.00 sec)
+
+
+
